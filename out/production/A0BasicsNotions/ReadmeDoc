@@ -1,0 +1,1228 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// A class is the blueprint (schita) from which individual objects are created, check lesson 83 of Tim B. / Java Course
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Declaring Classes
+
+// class MyClass {
+//     // field, constructor, and
+//     // method declarations
+// }
+
+// The class body (the area between the braces) contains all the code that provides for the life cycle of the objects created from the class: constructors for
+// initializing new objects, declarations for the fields that provide the state of the class and its objects, and methods to implement the behavior of the class
+// and its objects!!!
+
+// The preceding class declaration is a minimal one. It contains only those components of a class declaration that are required. You can provide more information about
+// the class, such as the name of its superclass, whether it implements any interfaces, and so on, at the start of the class declaration. For example,
+
+// class MyClass extends MySuperClass implements YourInterface { //  MyClass is a subclass of MySuperClass and it implements YourInterface interface
+//     // field, constructor, and
+//     // method declarations
+// }
+
+// In general, class declarations can include these components, in order:
+
+// Modifiers such as public, private, and a number of others that you will encounter later in the course.
+// The class name, with the initial letter capitalized by convention!!!
+// The name of the class's parent (superclass), if any, preceded by the keyword extends. A class can only extend (subclass) one parent.
+// A comma-separated list of interfaces implemented by the class, if any, preceded by the keyword implements (a class can implement more than one interface)!!!
+// The class body, surrounded by braces, {}.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Declaring Member Variables
+
+// There are several kinds of variables:
+
+// Member variables in a class — these are called fields.
+// Variables in a method or block of code — these are called local variables.
+// Variables in method declarations — these are called parameters.
+
+// Note: Parameters refers to the list of variables in a method declaration. Arguments are the actual values that are passed in when the method is invoked. When you
+// invoke a method, the arguments used must match the declaration's parameters in type and order!!!
+
+// Field declarations are composed of three components, in order:
+
+// Zero or more modifiers, such as public or private.
+// The field's type.
+// The field's name.
+
+/////
+// Access Modifiers & Encapsulation
+// The first (left-most) modifier used lets you control what other classes have access to a member field. For the moment, consider only public and private.
+// Other access modifiers will be discussed later.
+
+// public modifier — the field is accessible from all classes.
+// private modifier — the field is accessible only within its own class.
+
+// Encapsulation in Java is a mechanism of wrapping the data (variables) and code acting on the data (methods) together as a single unit!!!!! In encapsulation,
+// the variables of a class will be hidden from other classes, and can be accessed only through the methods of their current class. Therefore, it is also known as data
+// hiding.
+
+// To achieve encapsulation in Java:
+
+// Declare the variables of a class as private.
+// Provide public setter and getter methods to modify and view the variables values.
+
+// In the spirit of encapsulation, it is common to make fields private. This means that they can only be directly accessed from the Bicycle class in bellow example.
+// We still need access to these values, however. This can be done indirectly by adding public methods (getters and setters) that obtain the field values for us:
+
+// public class Bicycle {
+//
+//     private int cadence;
+//     private int gear;
+//     private int speed;
+//
+//     public Bicycle(int startCadence, int startSpeed, int startGear) { // constructor with arguments
+//         gear = startGear;
+//         cadence = startCadence;
+//         speed = startSpeed;
+//     }
+//
+//     // public methods:
+//
+//     public int getCadence() {
+//         return cadence;
+//     }
+//
+//     public void setCadence(int newValue) {
+//         cadence = newValue;
+//     }
+//
+//     public int getGear() {
+//         return gear;
+//     }
+//
+//     public void setGear(int newValue) {
+//         gear = newValue;
+//     }
+//
+//     public int getSpeed() {
+//         return speed;
+//     }
+//
+//     public void applyBrake(int decrement) {
+//         speed -= decrement;
+//     }
+//
+//     public void speedUp(int increment) {
+//         speed += increment;
+//     }
+// }
+
+/////
+// Field's type
+// All variables must have a type. You can use primitive types such as int, float, boolean, etc. Or you can use reference types, such as strings, arrays, or objects.
+
+/////
+// Field's name
+// All variables, whether they are fields, local variables, or parameters shoud follow the same naming rules (except that the first letter of a class name should be
+// capitalized, and the first or only word in a method name should be a verb)!!!!!
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Providing Constructors for Your Classes
+
+// A class contains constructors that are invoked to create objects from the class blueprint!!! Constructor declarations look like method declarations except that they
+// use the name of the class and have no return type. For example, Bicycle has one constructor:
+
+// public Bicycle(int startCadence, int startSpeed, int startGear) {
+//     gear = startGear;
+//     cadence = startCadence;
+//     speed = startSpeed;
+// }
+
+// To create a new Bicycle object called myBike, a constructor is called by the new operator!!!!! Check myBike object creation:
+
+// Bicycle myBike = new Bicycle(30, 0, 8); // new Bicycle(30, 0, 8) creates space in memory for the object and initializes its fields.
+
+// Although Bicycle only has one constructor, it could have others (kind-off overloading), including a no-argument constructor!!! Bellow example creates a new no-argument
+// contructor for Bicycle class:
+
+// public Bicycle() {
+//     gear = 1;
+//     cadence = 10;
+//     speed = 0;
+// }
+
+// Bicycle yourBike = new Bicycle(); invokes the no-argument constructor to create a new Bicycle object called yourBike.
+
+// Both constructors could have been declared in Bicycle because they have different argument lists!!! As with methods, the Java platform differentiates constructors on
+// the basis of the number of arguments in the list AND their type!!!!! You cannot write two constructors that have the same number and type of arguments for the same
+// class, because the platform would not be able to tell them apart. Doing so causes a compile-time error.
+
+// You don't have to provide any constructors for your class, but you must be careful when doing this. The compiler automatically provides a no-argument, default
+// constructor for any class without constructors!!!!! This default constructor will call the no-argument constructor of the superclass. In this situation, the compiler
+// will complain if the superclass doesn't have a no-argument constructor so you must verify that it does. If your class has no explicit superclass, then it has an
+// implicit superclass of Object, which does have a no-argument constructor!!!!!
+
+// You can use access modifiers in a constructor's declaration to control which other classes can call the constructor. Note that if another class cannot call a MyClass
+// constructor, it cannot directly create MyClass objects.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Passing Information to a Method OR Constructor
+
+// The declaration for a method or a constructor declares the number and the type of the arguments for that method or constructor. For example, the following is a method
+// that computes the monthly payments for a home loan, based on the amount of the loan, the interest rate, the length of the loan (the number of periods), and the future
+// value of the loan:
+
+// public double computePayment(double loanAmt, double rate, double futureValue, int numPeriods) {
+//     double interest = rate / 100.0;
+//     double partial1 = Math.pow((1 + interest),  - numPeriods);
+//     double denominator = (1 - partial1) / interest;
+//     double answer = (-loanAmt / denominator) - ((futureValue * partial1) / denominator);
+//     return answer;
+// }
+
+// This method has four parameters: the loan amount, the interest rate, the future value and the number of periods. The first three are double-precision floating point
+// numbers, and the fourth is an integer. The parameters are used in the method body and at runtime will take on the values of the arguments that are passed in.
+
+/////
+// Parameter Types
+// You can use any data type for a parameter of a method or a constructor. This includes primitive data types, such as doubles, floats, and integers AND reference data
+// types such as objects and arrays. Here's an example of a method that accepts an array as an argument. In this example, the method creates a new Polygon object and
+// initializes it from an array of Point objects (assume that Point is a class that represents an x, y coordinate):
+
+// public Polygon polygonFrom(Point[] corners) { // corners type is array of Point objects
+//     // method body goes here
+// }
+
+/////
+// Arbitrary Number of Arguments
+// You can use a construct called varargs to pass an arbitrary number of values to a method. You use varargs when you don't know how many of a particular type of argument
+// will be passed to the method. It's a shortcut to creating an array manually.
+
+// To use varargs, you follow the type of the last parameter by an ellipsis (three dots, ...), then a space, and the parameter name. The method can then be called with
+// any number of that parameter, including none.
+
+// public Polygon polygonFrom(Point... corners) {
+//     int numberOfSides = corners.length;
+//     double squareOfSide1, lengthOfSide1;
+//     squareOfSide1 = (corners[1].x - corners[0].x)
+//                      * (corners[1].x - corners[0].x)
+//                      + (corners[1].y - corners[0].y)
+//                      * (corners[1].y - corners[0].y);
+//     lengthOfSide1 = Math.sqrt(squareOfSide1);
+// }
+
+// You can see that, inside the method, corners is treated like an array. The method can be called either with an array or with a sequence of arguments.
+// The code in the method body will treat the parameter as an array in either case!!! Another more simple example:
+
+// public static void print(int... args) {
+//     System.out.println(Arrays.toString(args));
+// }
+
+/////
+// Parameter Names
+// When you declare a parameter to a method you provide a name for that parameter. This name is used within the method body to refer to the passed-in argument.
+
+// The name of a parameter must be unique in its scope! It cannot be the same as the name of another parameter for the same method or constructor, AND it cannot be
+// the name of a local variable within the method or constructor!!!
+
+// A parameter can have the same name as one of the class's fields. If this is the case, the parameter is said to shadow the field!!! Shadowing fields can make your code
+// difficult to read and is conventionally used only within constructors and methods that set a particular field. For example, consider the following Circle class and
+// its setOrigin method:
+
+// public class Circle {
+//     private int x, y, radius;
+//
+//     public void setOrigin(int x, int y) {
+//         ...
+//     }
+// }
+
+// The Circle class has three fields: x, y, and radius. The setOrigin method has two parameters, each of which has the same name as one of the fields. Each method
+// parameter shadows the field that shares its name. So using the simple names x or y within the body of the method refers to the parameter, not to the field!!!
+// To access the field, you must use a qualified name.
+
+/////
+// Does Java pass by reference or pass by value?
+
+// Many programming languages allow passing parameters by reference or by value. In Java, we can only pass parameters by value. This imposes some limits and also raises
+// questions. For instance, if the parameter value is changed in the method, what happens to the value following method execution?
+
+// In Java, primitive variables store the actual values, whereas non-primitives (objects) store the reference variables which point to the addresses of the objects
+// they're referring to. Both values and references are stored in the stack memory.
+
+///
+// a) Passing Primitive Data Type Arguments
+// Primitive arguments, such as an int or a double, are passed into methods by value, this means that a copy of the value will be passed to a method, the value is simply
+// copied inside stack memory which is then passed to the callee method (this also means the followings when the method returns: the original variables are not changed
+// BUT any changes to the values of the parameters inside the method will be lost as they exist only within the scope of the method)!!! Here is an example:
+
+// public class PassPrimitiveByValue {
+//
+//     public static void main(String[] args) {
+//
+//         int x = 3;
+//
+//         // invoke passMethod() with x as argument
+//         passMethod(x);
+//
+//         // print x to see if its value has changed
+//         System.out.println("After invoking passMethod, x = " + x);  // R: After invoking passMethod, x = 3
+//     }
+//
+//     // change parameter in passMethod()
+//     public static void passMethod(int p) {
+//         p = 10;
+//     }
+// }
+
+///
+// b) Passing Reference Data Type Arguments
+// Reference data type parameters are also passed into methods by value, this means that a copy of the "reference variable" value will be passed to a method and not
+// the actual object (this also means that when the method returns, the passed-in reference still references the same object as before)!!! For non-primitives a reference
+// in stack memory points to the actual data which resides in the heap memory, when we pass an object, the reference in stack memory is copied and the new reference is
+// passed to the method. However, the values of the object's fields can be changed in the method, if they have the proper access level. For example:
+
+// public void moveCircle(Circle circle, int deltaX, int deltaY) {
+//     // code to move origin of circle to x+deltaX, y+deltaY
+//     circle.setX(circle.getX() + deltaX);
+//     circle.setY(circle.getY() + deltaY);
+//
+//     // code to assign a new reference to circle
+//     circle = new Circle(0, 0);
+// }
+
+// Let the method be invoked with these arguments:
+
+// myCircle = new Circle(15, 8);
+// moveCircle(myCircle, 23, 56);
+
+// The method changes the x and y coordinates of the object that circle references (e.g myCircle) by 23 and 56, respectively. These changes will persist when the method
+// returns!!! Then circle is assigned a reference to a new Circle object with x = y = 0. This reassignment has no permanence however because the reference is a copy of
+// the actual reference passed and it exists only within the scope of the method. The actual reference myCircle still references the same Circle object as before
+// the method was called!!!
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Objects
+
+// A typical Java program creates many objects, which as you know, interact by invoking methods. Through these object interactions, a program can carry out various tasks,
+// such as implementing a GUI, running an animation, or sending and receiving information over a network. Once an object has completed the work for which it was created,
+// its resources are recycled for use by other objects.
+
+/////////////////////////////////////////////////////////////////////////////
+// Creating Objects
+// As you know, a class provides the blueprint for objects; you create an object from a class. Each of the following statements creates an object and assigns it to a
+// variable (the first line creates an object of the Point class, and the second and third lines each create an object of the Rectangle class):
+
+// Point originOne = new Point(23, 94);
+// Rectangle rectOne = new Rectangle(originOne, 100, 200);
+// Rectangle rectTwo = new Rectangle(50, 100);
+
+// Each of these statements has three parts (discussed in detail below):
+
+// Declaration: The first part of the code refers to variable declarations that associate a variable name with an object type.
+// Instantiation: The new keyword is a Java operator that creates the object.
+// Initialization: The new operator is followed by a call to a constructor, which initializes the new object.
+
+/////
+// Declaring a Variable to Refer to an Object.
+// Previously, you learned that to declare a variable, you write:
+
+//     type name;
+
+// This notifies the compiler that you will use name to refer to data whose type is type. With a primitive variable, this declaration also reserves the proper amount of
+// memory for the variable! You can also declare a "reference" variable on its own line, for example:
+
+//     Point originOne;
+
+// If you declare originOne like this, its value will be undetermined until an object is actually created and assigned to it. Simply declaring a reference variable does
+// not create an object. For that, you need to use the new operator, as described in the next section. You must assign an object to originOne before you use it in your
+// code. Otherwise, you will get a compiler error.
+
+/////
+// Instantiating a Class
+// The new operator instantiates a class by allocating memory for a new object and returning a reference to that memory!!!!! The new operator also invokes the object
+// constructor.
+
+// Note: The phrase "instantiating a class" means the same thing as "creating an object"! When you create an object, you are creating an "instance" of a class, therefore
+// "instantiating" a class!!! The new operator requires a single argument: a call to a constructor!!! The name of the constructor provides the name of the class
+// to instantiate. The new operator returns a reference to the object it created!!! This reference is usually assigned to a variable of the appropriate type, like:
+
+// Point originOne = new Point(23, 94); // Data_type name = new Constructor(arg)!!!
+
+// The reference returned by the new operator does not have to be assigned to a variable. It can also be used directly in an expression. For example:
+
+// int height = new Rectangle().height;
+
+/////
+// Initializing an Object
+// Here's the code for the Point class:
+
+// public class Point {
+//     public int x = 0;
+//     public int y = 0;
+//
+//     public Point(int a, int b) {
+//         x = a;
+//         y = b;
+//     }
+// }
+
+// This class contains a single constructor. You can recognize a constructor because its declaration uses the same name as the class and it has no return type. The
+// constructor in the Point class takes two integer arguments, as declared by the code (int a, int b). The following statement provides 23 and 94 as values for those
+// arguments:
+
+// Point originOne = new Point(23, 94);
+
+// Here's the code for the Rectangle class, which contains four constructors:
+
+// public class Rectangle {
+//     public int width = 0;
+//     public int height = 0;
+//     public Point origin;
+//
+//     // four constructors
+//     public Rectangle() {
+//         origin = new Point(0, 0);
+//     }
+//     public Rectangle(Point p) {
+//         origin = p;
+//     }
+//     public Rectangle(int w, int h) {
+//         origin = new Point(0, 0);
+//         width = w;
+//         height = h;
+//     }
+//     public Rectangle(Point p, int w, int h) {
+//         origin = p;
+//         width = w;
+//         height = h;
+//     }
+//
+//     // a method for moving the rectangle
+//     public void move(int x, int y) {
+//         origin.x = x;
+//         origin.y = y;
+//     }
+//
+//     // a method for computing the area of the rectangle
+//     public int getArea() {
+//         return width * height;
+//     }
+// }
+
+// Each constructor lets you provide initial values for the rectangle's origin, width, and height, using both primitive and reference types. If a class has multiple
+// constructors, they must have different signatures. The Java compiler differentiates the constructors based on the number and the type of the arguments! When the Java
+// compiler encounters the following code, it knows to call the constructor in the Rectangle class that requires a Point argument followed by two integer arguments:
+
+// Rectangle rectOne = new Rectangle(originOne, 100, 200); // origin one is the object created previously
+
+// This calls one of Rectangle's constructors that initializes origin to originOne (pass the reference). Also, the constructor sets width to 100 and height to 200.
+// Now there are two references to the same Point object: variable originOne and parameter p in the constructor of type Point of (an object can have multiple references
+// to it)!!!
+
+// The following line of code calls the Rectangle constructor that requires two integer arguments, which provide the initial values for width and height. If you inspect
+// the code within the constructor, you will see that it creates a new Point object whose x and y values are initialized to 0:
+
+// Rectangle rectTwo = new Rectangle(50, 100);
+
+// The Rectangle constructor used in the following statement doesn't take any arguments, so it's called a no-argument constructor:
+
+// Rectangle rect = new Rectangle();
+
+// All classes have at least one constructor. If a class does not explicitly declare any, the Java compiler automatically provides a no-argument constructor, called the
+// default constructor. This default constructor calls the class parent's no-argument constructor, or the Object constructor if the class has no other parent. If the
+// parent has no constructor (Object does have one), the compiler will reject the program.
+
+/////////////////////////////////////////////////////////////////////////////
+// Using Objects
+// Once you've created an object, you probably want to use it for something. You may need to use the value of one of its fields, change one of its fields, or call one of
+// its methods to perform an action.
+
+/////
+// Referencing an Object's Fields
+// Object fields are accessed by their name. You must use a name that is unambiguous.
+
+// Code that is outside the object's class must use an object reference or expression, followed by the dot (.) operator, followed by a simple field name, as in:
+
+// Point originOne = new Point(23, 94);
+// Rectangle rectOne = new Rectangle(originOne, 100, 200);
+// rectOne.width; // field width is public
+// rectOne.height; // field height is public
+
+// To access a field, you can use a named reference to an object, as in the previous examples, or you can use any expression that returns an object reference (this is
+// possible because of the public access modifier set for those fields)!!!!! Recall that the new operator returns a reference to an object. So you could use the value
+// returned from new to access a new object's fields:
+
+// int height = new Rectangle().height; // will return the default value
+
+// This statement creates a new Rectangle object and immediately gets its height. In essence, the statement calculates the default height of a Rectangle. Note that after
+// this statement has been executed, the program no longer has a reference to the created Rectangle, because the program never stored the reference anywhere (the value
+// returned is stored in height variable)!!! The object is unreferenced, and its resources are free to be recycled by the Java Virtual Machine.
+
+/////
+// Calling an Object's Methods
+// You also use an object reference to invoke an object's method. You append the method's simple name to the object reference, with an intervening dot operator (.). Also,
+// you provide, within enclosing parentheses, any arguments to the method. If the method does not require any arguments, use empty parentheses.
+
+// objectReference.methodName(argumentList);
+// objectReference.methodName();
+
+// The Rectangle class has two methods: getArea() to compute the rectangle's area and move() to change the rectangle's origin. Here's the CreateObjectDemo code that
+// invokes these two methods:
+
+// System.out.println("Area of rectOne: " + rectOne.getArea());
+// rectTwo.move(40, 72);
+
+// The first statement invokes rectOne's getArea() method and displays the results. The second line moves rectTwo because the move() method assigns new values to the
+// object's origin.x and origin.y.
+
+// As with instance fields, objectReference must be a reference to an object. You can use a variable name, but you also can use any expression that returns an object
+// reference. The new operator returns an object reference, so you can use the value returned from new to invoke a new object's methods:
+
+// new Rectangle(100, 50).getArea()
+
+// The expression new Rectangle(100, 50) returns an object reference that refers to a Rectangle object. As shown, you can use the dot notation to invoke the new
+// Rectangle's getArea() method to compute the area of the new rectangle.
+
+// Some methods, such as getArea(), return a value. For methods that return a value (not void), you can use the method invocation in expressions. You can assign the
+// return value to a variable, use it to make decisions, or control a loop. This code assigns the value returned by getArea() to the variable areaOfRectangle:
+
+// int areaOfRectangle = new Rectangle(100, 50).getArea();
+
+// Remember, invoking a method on a particular object is the same as sending a message to that object. In this case, the object that getArea() is invoked on is the
+// rectangle returned by the constructor.
+
+/////
+// The Garbage Collector
+// Some object-oriented languages require that you keep track of all the objects you create and that you explicitly destroy them when they are no longer needed. Managing
+// memory explicitly is tedious and error-prone. The Java platform allows you to create as many objects as you want (limited, of course, by what your system can handle),
+// and you don't have to worry about destroying them. The Java runtime environment deletes objects when it determines that they are no longer being used. This process is
+// called garbage collection.
+
+// An object is eligible for garbage collection when there are no more "references" to that object!!!!! References that are held in a variable are usually dropped when
+// the variable goes out of scope. Or, you can explicitly drop an object reference by setting the variable to the special value null. Remember that a program can have
+// multiple references to the same object; all references to an object must be dropped before the object is eligible for garbage collection.
+
+// The Java runtime environment has a garbage collector that periodically frees the memory used by objects that are no longer referenced. The garbage collector does its
+// job automatically when it determines that the time is right.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Returning a Value from a Method
+
+// A method returns to the code that invoked it when it completes all the statements in the method, reaches a return statement, or throws an exception (covered later)
+// The data type of the return value must match the method's declared return type; you can't return an integer value from a method declared to return a boolean. The
+// getArea() method in the Rectangle class that was discussed in the sections on objects returns an integer:
+
+// public int getArea() {
+//     return width * height;
+// }
+
+// This method returns the integer that the expression width*height evaluates to. The getArea method returns a primitive type. A method can also return a reference type.
+// For example, in a program to manipulate Bicycle objects, we might have a method like this:
+
+// public Bicycle seeWhosFastest(Bicycle myBike, Bicycle yourBike, Environment env) {
+//     Bicycle fastest;
+//     // code to calculate which bike is faster, given each bike's gear and cadence and given the environment (terrain and wind)
+//     return fastest;
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  Returning a Class or Interface
+
+// When a method uses a class name as its return type, such as seeWhosFastest does, the class of the type of the returned object must be either a subclass of, or the
+// exact class of, the return type!!! Suppose that you have a class hierarchy in which ImaginaryNumber is a subclass of java.lang.Number, which is in turn a subclass of
+// Object. Now suppose that you have a method declared to return a Number:
+
+// public Number returnANumber() {
+//     ...
+// }
+
+// The returnANumber method can return an ImaginaryNumber but not an Object!!! ImaginaryNumber is a Number because it's a subclass of Number. However, an Object is not
+// necessarily a Number — it could be a String or another type. You can override a method and define it to directly return a subclass of the original method, like this:
+
+// public ImaginaryNumber returnANumber() {
+//     ...
+// }
+
+// This technique, called covariant return type, means that the return type is allowed to vary in the same direction as the subclass.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Using the this Keyword
+
+// Within an instance method or a constructor, this is a reference to the current object — the object whose method or constructor is being called!!! You can refer to any
+// member of the current object from within an instance method or a constructor by using this.
+
+/////
+// a) Using this with a Field
+// The most common reason for using the this keyword is because a field is "shadowed" by a method or constructor parameter!!! For example, the Point class was written
+// like this:
+
+// public class Point {
+//     public int x = 0;
+//     public int y = 0;
+//
+//     //constructor
+//     public Point(int a, int b) {
+//         x = a;
+//         y = b;
+//     }
+// }
+
+// but it could have been written like this:
+
+// public class Point {
+//     public int x = 0;
+//     public int y = 0;
+
+//     //constructor
+//     public Point(int x, int y) {
+//         this.x = x;
+//         this.y = y;
+//     }
+// }
+
+// Each argument to the constructor shadows one of the object's fields — inside the constructor x is a local copy of the constructor's first argument. To refer to the
+// Point field x, the constructor must use this.x.
+
+/////
+// b) Using this with a Constructor
+// From within a constructor, you can also use the this keyword to call another constructor in the same class!!! Doing so is called an explicit constructor invocation.
+// Here's another Rectangle class, with a different implementation from the one in the Objects section.
+
+// public class Rectangle {
+//     private int x, y;
+//     private int width, height;
+//
+//     public Rectangle() {
+//         this(0, 0, 1, 1); // calls another constructor setting default values
+//     }
+//     public Rectangle(int width, int height) {
+//         this(0, 0, width, height);
+//     }
+//     public Rectangle(int x, int y, int width, int height) {
+//         this.x = x;
+//         this.y = y;
+//         this.width = width;
+//         this.height = height;
+//     }
+//     ...
+// }
+
+// This class contains a set of constructors. Each constructor initializes some or all of the rectangle's member variables. The constructors provide a default value for
+// any member variable whose initial value is not provided by an argument. For example, the no-argument constructor creates a 1x1 Rectangle at coordinates 0,0. The
+// two-argument constructor calls the four-argument constructor, passing in the width and height but always using the 0,0 coordinates. As before, the compiler determines
+// which constructor to call, based on the number and the type of arguments. If present, the invocation of another constructor must be the first line in the constructor.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Controlling Access to Members of a Class
+
+// Access level modifiers determine whether other classes can use a particular field or invoke a particular method. There are two levels of access control:
+
+// At the top level : public, or package-private (no explicit modifier) -  classes can only be declared public or package private!!!
+// At the member level : public, private, protected, or package-private (no explicit modifier).
+
+// A class may be declared with the modifier public, in which case that class is visible to all classes everywhere. If a class has no modifier (the default, also known
+// as package-private), it is visible only within its own package (packages are named groups of related classes — you will learn about them in a later lesson.)
+
+// At the member level, you can also use the public modifier or no modifier (package-private) just as with top-level classes, and with the same meaning. For members,
+// there are two additional access modifiers: private and protected. The private modifier specifies that the member can only be accessed in its own class. The protected
+// modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another
+// package. The following table shows the access to members permitted by each modifier.
+
+// Modifier	  Class	Package	Subclass World (for methods & fields)
+// public	    Y	Y	     Y	      Y
+// protected	Y	Y	     Y        N
+// no modifier	Y	Y        N        N
+// private  	Y	N	     N	      N
+
+// The first data column indicates whether the class itself has access to the member defined by the access level. As you can see, a class always has access to its own
+// members. The second column indicates whether classes in the same package as the class (regardless of their parentage) have access to the member. The third column
+// indicates whether subclasses of the class declared outside this package have access to the member. The fourth column indicates whether all classes have access to the
+// member.
+
+// Access levels affect you in two ways. First, when you use classes that come from another source, such as the classes in the Java platform, access levels determine
+// which members of those classes your own classes can use. Second, when you write a class, you need to decide what access level every member variable and every method
+// in your class should have.
+
+// Use the most restrictive access level that makes sense for a particular member. Use private unless you have a good reason not to!!! Avoid public fields except for
+// constants. Public fields tend to link you to a particular implementation and limit your flexibility in changing your code.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Understanding Class Members (static members: variables and methods)
+
+// In this section, we discuss the use of the static keyword to create fields and methods that belong to the class, rather than to an instance of the class!!!
+
+/////
+// a) Class Variables (static fields)
+// When a number of objects are created from the same class blueprint, they each have their own distinct copies of instance variables. In the case of the Bicycle class,
+// the instance variables are cadence, gear, and speed. Each Bicycle object has its own values for these variables, stored in different memory locations.
+
+// Sometimes, you want to have variables that are common to all objects. This is accomplished with the static modifier. Fields that have the static modifier in their
+// declaration are called static fields or class variables. They are associated with the class, rather than with any object!!! Every instance of the class shares a class
+// variable, which is in one fixed location in memory!!! Any object can change the value of a class variable (only if that variable is not declared as final), but class
+// variables can also be manipulated without creating an instance of the class!!!
+
+// For example, suppose you want to create a number of Bicycle objects and assign each a serial number, beginning with 1 for the first object. This ID number is unique
+// to each object and is therefore an instance variable. At the same time, you need a field to keep track of how many Bicycle objects have been created so that you know
+// what ID to assign to the next one. Such a field is not related to any individual object, but to the class as a whole. For this you need a class variable,
+// numberOfBicycles, as follows:
+
+// public class Bicycle {
+//     private int cadence;
+//     private int gear;
+//     private int speed;
+//     private int id; // instance variable for the object ID
+//     private static int numberOfBicycles = 0; // class variable for the number of Bicycle objects instantiated
+//         ...
+// }
+
+// Class variables are referenced by the class name itself, as in
+
+// Bicycle.numberOfBicycles
+
+// This makes it clear that they are class variables.
+
+// Note: You can also refer to static fields with an object reference like myBike.numberOfBicycles but this is discouraged because it does not make it clear that they
+// are class variables.
+
+// You can use the Bicycle constructor to set the id instance variable and increment the numberOfBicycles class variable:
+
+// public class Bicycle {
+//     private int cadence;
+//     private int gear;
+//     private int speed;
+//     private int id;
+//     private static int numberOfBicycles = 0;
+//
+//     public Bicycle(int startCadence, int startSpeed, int startGear){
+//         gear = startGear;
+//         cadence = startCadence;
+//         speed = startSpeed;
+//         id = ++numberOfBicycles; // increment number of Bicycles and assigns ID number (you dont have to refer to the static variable using its class name
+//                                  // in the constructor or non-static methods)
+//     }
+//
+//     public int getID() {
+//         return id;
+//     }
+//
+//      public static void main(String[] args) {
+//          int noByc = Bicycle.numberOfBicycles; // notice the use of class name for retriving the number of bicyles
+//      }
+// }
+
+/////
+// Constants
+// The static modifier, in combination with the final modifier, is also used to define constants. The final modifier indicates that the value of this field cannot change.
+// For example, the following variable declaration defines a constant named PI, whose value is an approximation of pi (the ratio of the circumference of a circle to its
+// diameter):
+
+// static final double PI = 3.141592653589793;
+
+// Constants defined in this way cannot be reassigned, and it is a compile-time error if your program tries to do so. By convention, the names of constant values are
+// spelled in uppercase letters!!! If the name is composed of more than one word, the words are separated by an underscore (_).
+
+// Note: If a primitive type or a string is defined as a constant and the value is known at compile time, the compiler replaces the constant name everywhere in the code
+// with its value. This is called a compile-time constant. If the value of the constant in the outside world changes (for example, if it is legislated that pi actually
+// should be 3.975), you will need to recompile any classes that use this constant to get the current value.
+
+// A) When you define a field as "static final" then its mandatory to initialize it during its declaration or using a static initialization block (check next
+// example); also, you can't assign "static final" fields in a constructor or static method!!!
+
+// public class Password {
+//     private static final int key;
+//     private final int encryptedPassword;
+
+//     static {
+//         key= 748576362;
+//     }
+//
+//     public Password(int password) {
+//         this.encryptedPassword = encryptDecrypt(password);
+//     }
+
+//     private int encryptDecrypt(int password) {
+//         return password ^ key;
+//     }
+
+//     public final void listStoredPassword() {
+//         System.out.println("Saved password is " + this.encryptedPassword);
+//     }
+// }
+
+// B) When a field is defined ONLY as final, it has to be initialised when the object is constructed (such field is an instance field and not a class field):
+
+//     private static int classCounter = 0;
+//     public final int instanceNumber;  // initialized in the constructor as bellow
+//     private final String name;  // initialized in the constructor as bellow
+//     private static final int classKey; // initialized in the static initialization block!!!
+//
+//     static {
+//         classKey= 748576362;
+//     }
+//
+//     public SomeClass(String name) {
+//         classCounter++;
+//         this.name = name;
+//         this.instanceNumber = classCounter; // fiecare instantiere se foloseste de fieldul clasei classCounter pt a seta valoarea finala
+//         System.out.println(name + " created, instance is " + instanceNumber);
+//     }
+//
+//     public int getInstanceNumber() {
+//         return instanceNumber;
+//     }
+// }
+
+/////
+// Class Methods (static methods)
+// The Java programming language supports static variables as well as static methods. Static methods, which have the static modifier in their declarations, should be
+// invoked with the class name, without the need for creating an instance of the class, as in:
+
+// ClassName.methodName(args)
+
+// Note: You can also refer to static methods with an object reference like instanceName.methodName(args) but this is discouraged because it does not make it clear that
+// they are class methods.
+
+// A common use for static methods is to access static fields (which may be private)!!!!! For example, we could add a static method to the Bicycle class to access the
+// numberOfBicycles static field:
+
+// public static int getNumberOfBicycles() {
+//     return numberOfBicycles;
+// }
+
+// Not all combinations of instance and class variables and methods are allowed!!! Bellow the list of valid combinations:
+
+// Instance methods can access instance variables and instance methods directly.
+// Instance methods can access class variables (static fields) and class methods (static methods) directly.
+// Class methods (static methods) can access class variables (static variables) and class methods (static methods) directly.
+// Class methods (static methods) cannot access instance variables or instance methods directly — they must use an object reference (think of main method). Also, class
+// methods cannot use the this keyword as there is no instance for this to refer to.
+
+// Note: a static method is associated with a class, not an object!!!
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Initializing Fields
+
+// As you have seen, you can often provide an initial value for a field in its declaration:
+
+// public class BedAndBreakfast {
+//     public static int capacity = 10; // initialize to 10
+//     private boolean full = false; // initialize to false
+// }
+
+// This works well when the initialization value is available and the initialization can be put on one line. However, this form of initialization has limitations because
+// of its simplicity. If initialization requires some logic (for example, error handling or a for loop to fill a complex array), simple assignment is inadequate.
+// Instance variables can be initialized in constructors, where error handling or other logic can be used. To provide the same capability for class variables, the Java
+// programming language includes static initialization blocks (check next section)!!!
+
+// Note: It is not necessary to declare fields at the beginning of the class definition, although this is the most common practice. It is only necessary that they be
+// declared and initialized before they are used.
+
+/////
+// A) Static Initialization Blocks
+// A static initialization block is a normal block of code enclosed in braces, { }, and preceded by the static keyword. Here is an example:
+
+// static {
+//     // whatever code is needed for initialization goes here
+// }
+
+// A class can have any number of static initialization blocks, and they can appear anywhere in the class body. The runtime system guarantees that static initialization
+// blocks are called in the order that they appear in the source code (at the time the class is instantiated). There is an alternative to static blocks, you can write
+// a private static method (stil this is not an option for "static final" fields) :
+
+// class Whatever {
+//     public static varType myVar = initializeClassVariable();
+//
+//     private static varType initializeClassVariable() {
+//         // initialization code goes here
+//     }
+// }
+
+// The advantage of private static methods is that they can be reused later if you need to reinitialize the class variable (static fields):
+
+// Whatever.initializeClassVariable();
+
+//////
+// B) Initializing Instance Members
+// Normally, you would put code to initialize an instance variable in a constructor. There are two alternatives to using a constructor to initialize instance variables:
+// initializer blocks and final methods (or you could use setters).
+
+// Initializer blocks for instance variables look just like static initializer blocks, but without the static keyword:
+
+// {
+//     // whatever code is needed for initialization goes here
+// }
+
+// The Java compiler copies initializer blocks into every constructor. Therefore, this approach can be used to share a block of code between multiple constructors.
+
+// A final method cannot be overridden in a subclass!!! This is discussed in the lesson on interfaces and inheritance. Here is an example of using a "final method" for
+// initializing an instance variable:
+
+// class Whatever {
+//     private varType myVar = initializeInstanceVariable();
+//
+//     protected final varType initializeInstanceVariable() {
+//         // initialization code goes here
+//     }
+// }
+
+// This is especially useful if subclasses might want to reuse the initialization method. The method is final because calling non-final methods during instance
+// initialization can cause problems!!!
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Java Enums
+
+// An enum is a special "class" that represents a group of constants (unchangeable variables, like final variables)!!!
+// To create an enum, use the enum keyword (instead of class or interface), and separate the constants with a comma. Note that they should be in uppercase letters!!!
+
+// enum Level {
+//     LOW,
+//     MEDIUM,
+//     HIGH
+//   }
+
+/////
+// Enum inside a Class
+
+// public class MyClass {
+//     enum Level {
+//       LOW,
+//       MEDIUM,
+//       HIGH
+//     }
+//
+//     Level level;  //
+//
+//     public static void main(String[] args) {
+//       level = Level.MEDIUM;
+//       System.out.println(myVar);
+//     }
+//   }
+
+// You can access enum constants with the dot syntax:
+
+// Level myVar = Level.MEDIUM;
+
+/////
+// Enum in a Switch Statement
+// Enums are often used in switch statements to check for corresponding values:
+
+// enum Level {
+//     LOW,
+//     MEDIUM,
+//     HIGH
+//   }
+//
+//   public class MyClass {
+//     public static void main(String[] args) {
+//       Level myVar = Level.MEDIUM;
+//
+//       switch(myVar) {
+//         case LOW:
+//           System.out.println("Low level");
+//           break;
+//         case MEDIUM:
+//            System.out.println("Medium level");
+//           break;
+//         case HIGH:
+//           System.out.println("High level");
+//           break;
+//       }
+//     }
+//   }
+
+/////
+// Loop Through an Enum
+// The enum type has a values() method, which returns an array of all enum constants. This method is useful when you want to loop through the constants of an enum:
+
+// for (Level myVar : Level.values()) {
+//     System.out.println(myVar);
+//   }
+
+// The output will be:
+
+// LOW
+// MEDIUM
+// HIGH
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Variables (In the Java programming language, the terms "field" and "variable" are both used).
+
+// The Java programming language defines the following kinds of variables:
+
+// Instance Variables (Non-Static Fields). Technically speaking, objects store their individual states in "non-static fields", that is, fields declared without the
+// static keyword. Variables that are defined without the STATIC keyword and are outside any method declaration are Object-specific and are known as instance variables.
+// They are called so because their values are instance specific and are not shared among instances. Non-static fields are also known as instance variables because their
+// values are unique to each instance of a class (to each object, in other words); the currentSpeed of one bicycle is independent from the currentSpeed of another!!!
+
+// Class Variables (Static Fields). A class variable is any field declared with the static modifier; this tells the compiler that there is exactly one copy of this
+// variable in existence, regardless of how many times the class has been instantiated. A field defining the number of gears for a particular kind of bicycle could be
+// marked as static since conceptually the same number of gears will apply to all instances!!! The code static int numGears = 6; would create such a static field.
+// Additionally, the keyword final could be added to indicate that the number of gears will never change!!!
+
+// Local Variables. Similar to how an object stores its state in fields, a method will often store its temporary state in local variables. The syntax for declaring a
+// local variable is similar to declaring a field (for example, int count = 0;). There is no special keyword designating a variable as local; that determination comes
+// entirely from the location in which the variable is declared — which is between the opening and closing braces of a method. As such, local variables are only visible
+// to the methods in which they are declared; they are not accessible from the rest of the class!!! Local variables can’t be static.
+
+// Parameters. The signature for the main method is "public static void main(String[] args)". Here, the args variable is the parameter to this method. The important
+// thing to remember is that parameters are always classified as "variables" not "fields"!!! This applies to other parameter-accepting constructs as well (such as
+// constructors and exception handlers).
+
+// Summary: Instance variables (non-static fields) are unique to each instance of a class. Class variables (static fields) are fields declared with the static modifier;
+// there is exactly one copy of a class variable, regardless of how many times the class has been instantiated. Local variables store temporary state inside a method.
+// Parameters are variables that provide extra information to a method; both local variables and parameters are always classified as "variables" (not "fields")!!!!!
+
+// Note on naming convention: If the name you choose consists of only one word, spell that word in all lowercase letters. If it consists of more than one word,
+// capitalize the first letter of each subsequent word.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Final Variables
+
+// You can add the final keyword if you don't want others (or yourself) to overwrite existing values (this will declare the variable as "final" or
+// "constant", which means unchangeable and read-only)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Data types
+
+// Primitive data types -  byte, short, int, long, float, double, boolean and char
+// Non-primitive data types - String, Arrays and Classes
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Primitive data types
+
+// byte  ---   1 byte Stores whole numbers from -128 to 127
+// short ---   2 bytes Stores whole numbers from -32,768 to 32,767
+// int   ---   4 bytes Stores whole numbers from -2,147,483,648 to 2,147,483,647
+// long  ---   8 bytes Stores whole numbers from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+// float ---   4 bytes Stores fractional numbers. Sufficient for storing 6 to 7 decimal digits
+// double ---  8 bytes Stores fractional numbers. Sufficient for storing 15 decimal digits
+// boolean --- 1 bit Stores true or false values.
+// char ---    2 bytes Stores a single character/letter or ASCII values (single character)
+
+// Values of the integral types byte, short, int, and long can be created from int literals.
+// An integer literal is of type long if it ends with the letter L or l; otherwise it is of type int.
+// Values of type long that exceed the range of int can be created from long literals.
+
+// long x=34  <= integer
+// long x=23234234234 <= integer but will error out because of its size
+// long x=23234234234L <= actual long
+
+// A floating-point literal is of type float if it ends with the letter F or f; otherwise its type is double and it can optionally end with the letter D or d.
+
+// double d1 = 123.4;
+// double d2 = 1.234e2;
+// float f1  = 123.4f; <= float
+// float f1  = 123.4; <= double
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Default values
+
+// a) For Instance Variables & Class Variables:
+
+// byte	0
+// short 0
+// int 0
+// long	0L
+// float 0.0f
+// double 0.0d
+// char	'\u0000'
+// String (or any object) null
+// boolean	false
+
+// b) Local variables (method variables) are slightly different; the compiler never assigns a default value to an uninitialized local variable. If you cannot initialize
+// your local variable where it is declared, make sure to assign it a value before you attempt to use it. Accessing an uninitialized local variable will result in a
+// compile-time error.
+
+//////////////////////////////////////////////
+// Data types wrapper classes
+
+// Java uses the concept of a Wrapper class for all eight primitive types - In the case of an int, we can use Integer, and by doing that it gives us ways to perform
+// operations on an int. Wrapper classes provide a way to use primitive data types (int, boolean, etc..) as objects!!!
+
+// byte	    Byte
+// short    Short
+// int	    Integer
+// long	    Long
+// float	Float
+// double	Double
+// boolean	Boolean
+// char	    Character
+
+// int myMinIntValue = Integer.MIN_VALUE;
+// int myMaxIntValue = Integer.MAX_VALUE;
+// System.out.println("Integer Minimum Value = " + myMinIntValue);
+// System.out.println("Integer Maximum Value = " + myMaxIntValue);
+
+// NOTE: Even though there are many numeric types in Java, the most used for numbers are int (for whole numbers) and double (for floating point numbers).
+
+//////////////////////////////////////////////
+// Data type casting
+
+// Java Type Casting is when you assign a value of one primitive data type to another type. In Java, there are two types of casting:
+
+// Widening Casting (automatically) - converting a smaller type to a larger type size byte -> short -> char -> int -> long -> float -> double
+// Example:
+// int myInt = 9;
+// double myDouble = myInt; // Automatic casting: int to double
+
+// Narrowing Casting (manually) - converting a larger type to a smaller size type double -> float -> long -> int -> char -> short -> byte
+// Example:
+// double myDouble = 9.78;
+// int myInt = (int) myDouble;
+
+// Important: null may be assigned to any variable, except variables of primitive types!!!
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Non-primitive data types - String, Arrays and Classes
+
+// In addition to the eight primitive data types listed above, the Java programming language also provides special support for character strings via the java.lang.String class.
+// Enclosing your character string within double quotes will automatically create a new String object; for example, String s = "this is a string"; String objects
+// are immutable, which means that once created, their values cannot be changed!!! The String class is not technically a primitive data type, but considering the special
+// support given to it by the language, you'll probably tend to think of it as such.
+
+// There's a special null literal that can be used as a value for any reference types (string types, arrays types, class types, interface types).
+// Important: null may be assigned to any variable, except variables of primitive types!!! There's little you can do with a null value beyond testing for its presence.
+// Therefore, null is often used in programs as a marker to indicate that some object is unavailable.
+
+//////////////////////////////////////////////
+// Java Strings:
+
+// Strings are used for storing text. A String variable contains a collection of characters surrounded by double quotes. A String in Java is actually an object, which
+// contain methods that can perform certain operations on strings (remember that String objects are immutable). For example, the length of a string can be found with
+// the length() method:
+
+// Example:
+// String txt = "Hello World";
+// System.out.println("The length of the txt string is: " + txt.length());
+// System.out.println(txt.toUpperCase());   // Outputs "HELLO WORLD"
+// System.out.println(txt.toLowerCase());   // Outputs "hello world"
+
+// Note: Always use 'single quotes' for char literals and "double quotes" for String literals.
+
+// If String is immutable, why is the following statement allowed?
+
+// String a = "Generic Class";
+// a = "www.genericclass.com";
+
+// One can say in the above statements that they are able to change the value of a String object from "Generic Class" to "www.genericclass.com" but this assumption
+// is wrong. In the above statements, you are not changing the value of the String object. Here, you are basically changing the reference. Previously, your variable
+// a was pointing to an object that had the value "Generic Class" but in the second statement a new object is created with value "www.genericclass.com" and your variable
+// started to point to this new object.
+
+//////////////////////////////////////////////
+// Java Arrays:
+
+// An array is a container object that holds a fixed number of values of a single type. The length of an array is established when the array is created.
+// After creation, its length is fixed.
+
+// Array types:
+// byte[] anArrayOfBytes; extends Number; extends Object;
+// short[] anArrayOfShorts; extends Number; extends Object;
+// int[] anArrayOfIntegers; extends Number; extends Object;
+// long[] anArrayOfLongs; extends Number; extends Object;
+// float[] anArrayOfFloats; extends Number; extends Object;
+// double[] anArrayOfDoubles; extends Number; extends Object;
+// Byte, Short, Integer, Long, Float, Double wrapper classes; extends Number;
+// Number[] anArrayOfNumbers; extends Object;
+// boolean[] anArrayOfBooleans; extends Object;
+// char[] anArrayOfChars; extends Object;
+// Character wrapper class; extends extends Object;
+// String[] anArrayOfStrings; extends Object;
+// Object[] tatal lor, array de obiecte!
+
+// Methods of interest: asList, binarySearch, copyOf, copyOfRange, equals, fill, parallelPrefix, parallelSort, setAll, 	sort, spliterator, stream, 	toString
+
+//////////////////////////////////////////////
+// Java Classes:
+
+// Java classes and objects (covered in their own section) are the two main aspects of object-oriented programming.
+
+// A class is a template for objects, and an object is an instance of a class.
+// When the individual objects are created, they inherit all the variables and methods from the class.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Arithmetic Operators
+
+// + Addition        --- Adds together two values x + y
+// - Subtraction     --- Subtracts one value from another x - y
+// * Multiplication  --- Multiplies two values x * y
+// / Division        --- Divides one value by another x / y
+// % Modulus         --- Returns the division remainder x % y
+// ++ Increment      --- Increases the value of a variable by 1 ++x
+// -- Decrement      --- Decreases the value of a variable by 1 --x
+
+// ++a increments the value and immediately returns it
+// a++ increments the value (in the background) but returns unchanged value of the variable
+
+// x = 55   ---  x = 55
+// x += 3   ---  x = x + 3
+// x -= 3   ---  x = x - 3
+// x *= 3   ---  x = x * 3
+// x /= 3   ---  x = x / 3
+// x %= 3   ---  x = x % 3
+// x &= 3   ---  x = x & 3
+// x |= 3   ---  x = x | 3
+// x ^= 3   ---  x = x ^ 3
+// x >>= 3  ---  x = x >> 3
+// x <<= 3  ---  x = x << 3
+
+// NOTE: Java internally does rounding to zero, remove anything to the right of the decimal when you divide two integers.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Java Math
+
+// Math.max(5, 10);
+// Math.min(5, 10);
+// Math.sqrt(64);
+// Math.abs(-4.7);
+// Math.ceil(x)
+// Math.random();
+
+// Example:
+// int randomNum = (int) (Math.random() * 101);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Java Comparison Operators
+
+// == Equal to x == y
+// != Not equal x != y
+// > Greater than x > y
+// < Less than x < y
+// >= Greater than or equal to x >= y
+// <= Less than or equal to x <= y
+
+// Another conditional operator is ?:, which can be thought of as shorthand for an if-then-else statement (discussed in the Control Flow Statements section of this
+// lesson). This operator is also known as the ternary operator because it uses three operands. In the following example, this operator should be read as: "If
+// someCondition is true, assign the value of value1 to result. Otherwise, assign the value of value2 to result."
+
+// result = someCondition ? value1 : value2;
+
+/////
+// Java String compareTo() Method
+
+// String myStr1 = "Hello";
+// String myStr2 = "Hello";
+// System.out.println(myStr1.compareTo(myStr2)); // Returns 0 because they are equal
+
+// The method returns 0 if the string is equal to the other string. A value less than 0 is returned if the string is less than the other string (less characters) and a
+// value greater than 0 if the string is greater than the other string (more characters).
+
+// Also when comparing Strings equals method should be used insted of == (which compares only the reference) as String is actually an object!!!
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Java Logical Operators
+
+// Logical operators are used to determine the logic between variables or values:
+
+// && 	Logical and:	Returns true if both statements are true	x < 5 &&  x < 10
+// || 	Logical or:  	Returns true if one of the statements is true	x < 5 || x < 4
+// !	Logical not:	Reverse the result, returns false if the result is true	!(x < 5 && x < 10)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Java Bitwise Operators
+
+// Bitwise operators are used to perform binary logic with the bits of an integer or long integer.
+
+// &	AND - Sets each bit to 1 if both bits are 1:	5 & 1	0101 & 0001	0001  => 1
+// |	OR - Sets each bit to 1 if any of the two bits is 1:	5 | 1	0101 | 0001	0101  => 5
+// ~	NOT - Inverts all the bits:	~ 5	 ~0101	1010  => 10
+// ^	XOR - Sets each bit to 1 if only one of the two bits is 1:	5 ^ 1	0101 ^ 0001	0100 => 4
+// <<	Zero-fill left shift - Shift left by pushing zeroes in from the right and letting the leftmost bits fall off:	9 << 1	1001 << 1	0010  => 2
+// >>	Signed right shift - Shift right by pushing copies of the leftmost bit in from the left and letting the rightmost bits fall off: 9 >> 1	| 1001 >> 1 | 1100  => 12
+// >>>	Zero-fill right shift - Shift right by pushing zeroes in from the left and letting the rightmost bits fall off: 9 >>> 1	1001 >>> 1	0100	4
+

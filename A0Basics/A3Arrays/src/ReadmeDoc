@@ -1,0 +1,42 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// An array is a container object that holds a fixed number of values of a single type. The length of an array is established when the array is created. After creation,
+// its length is fixed.
+
+// int[] anArrayOfInts
+// byte[] anArrayOfBytes;
+// short[] anArrayOfShorts;
+// long[] anArrayOfLongs;
+// float[] anArrayOfFloats;
+// double[] anArrayOfDoubles;
+// boolean[] anArrayOfBooleans;
+// char[] anArrayOfChars;
+// String[] anArrayOfStrings;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Creating, Initializing, and Accessing an Array
+
+// One way to create an array is with the new operator. The next statement in the ArrayDemo program allocates an array with enough memory for 10 integer elements and
+// assigns the array to the anArray variable.
+
+// anArray = new int[10]; // array of integers
+
+// The next few lines assign values to each element of the array:
+
+// anArray[0] = 100; // initialize first element
+// anArray[1] = 200; // initialize second element
+// anArray[2] = 300; // and so forth
+
+// Each array element is accessed by its numerical index:
+
+// System.out.println("Element 1 at index 0: " + anArray[0]);
+// System.out.println("Element 2 at index 1: " + anArray[1]);
+// System.out.println("Element 3 at index 2: " + anArray[2]);
+
+// Alternatively, you can use the shortcut syntax to create and initialize an array:
+
+// int[] anArray = { 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000};
+
+// You can also declare an array of arrays (also known as a multidimensional array) by using two or more sets of brackets, such as String[][] names. Each element,
+// therefore, must be accessed by a corresponding number of index values.
+
+// The System class has an arraycopy method that you can use to efficiently copy data from one array into another

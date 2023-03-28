@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/A0Basics/A0Basics.iml" filepath="$PROJECT_DIR$/A0Basics/A0Basics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/A0Basics/A0BasicsNotions/A0BasicsNotions.iml" filepath="$PROJECT_DIR$/A0Basics/A0BasicsNotions/A0BasicsNotions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/A0Basics/A1ControlFlow.java/A1ControlFlow.java.iml" filepath="$PROJECT_DIR$/A0Basics/A1ControlFlow.java/A1ControlFlow.java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/A0Basics/A2Methods/A2Methods.iml" filepath="$PROJECT_DIR$/A0Basics/A2Methods/A2Methods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/A0Basics/A3Arrays/A3Arrays.iml" filepath="$PROJECT_DIR$/A0Basics/A3Arrays/A3Arrays.iml" />
+      <module fileurl="file://$PROJECT_DIR$/A0Basics/A4Lists/A4Lists.iml" filepath="$PROJECT_DIR$/A0Basics/A4Lists/A4Lists.iml" />
+      <module fileurl="file://$PROJECT_DIR$/A0Basics/A5Maps/A5Maps.iml" filepath="$PROJECT_DIR$/A0Basics/A5Maps/A5Maps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/B1ClassesAndObjects/B1ClassesAndObjects.iml" filepath="$PROJECT_DIR$/B1ClassesAndObjects/B1ClassesAndObjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RootProject.iml" filepath="$PROJECT_DIR$/RootProject.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,48 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Map basics
+
+// Map is an abstract data type
+
+// Interface Map<K,V>
+// Type Parameters:
+// K - the type of keys maintained by this map
+// V - the type of mapped values
+
+// All Known Subinterfaces:
+// Bindings, ConcurrentMap<K,V>, ConcurrentNavigableMap<K,V>, LogicalMessageContext, MessageContext, NavigableMap<K,V>, SOAPMessageContext, SortedMap<K,V>
+
+// All Known Implementing Classes:
+// AbstractMap, Attributes, AuthProvider, ConcurrentHashMap, ConcurrentSkipListMap, EnumMap, HashMap, LinkedHashMap, Hashtable, IdentityHashMap, PrinterStateReasons,
+// Properties, Provider, RenderingHints, SimpleBindings, TabularDataSupport, TreeMap, UIDefaults, WeakHashMap
+
+// In order to create "dictionaries" you need to use classes that implement the Map interface above, HasMap is briefly presented bellow:
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// HASHMAP: A HashMap however, store items in "key/value" pairs, and you can access them by an index of another type (e.g. a String).
+
+// One object is used as a key(index) to another object(value).It can store different types:String keys and Integer values,or the same type,like:String keys and String
+// values:
+
+// HashMap<String, String> capitalCities = new HashMap<String, String>();
+
+// A hashmap works like this (this is a little bit simplified, but it illustrates the basic mechanism):
+// It has a number of "buckets" which it uses to store key-value pairs in. Each bucket has a unique number - that's what identifies the bucket. When you put a key-value
+// pair into the map, the hashmap will look at the hash code of the key, and store the pair in the bucket of which the identifier is the hash code of the key.
+// For example: The hash code of the key is 235 -> the pair is stored in bucket number 235. (Note that one bucket can store more then one key-value pair).
+// When you lookup a value in the hashmap, by giving it a key, it will first look at the hash code of the key that you gave. The hashmap will then look into the
+// corresponding bucket, and then it will compare the key that you gave with the keys of all pairs in the bucket, by comparing them with equals().
+// Now you can see how this is very efficient for looking up key-value pairs in a map: by the hash code of the key the hashmap immediately knows in which bucket to look,
+// so that it only has to test against what's in that bucket. HashMap allows one null key and any number of null values.
+
+// Keys and values in a HashMap are actually objects. Remember that a String in Java is an object (not a primitive type). To use other types, such as int, you must
+// specify an equivalent wrapper class: Integer. For other primitive types, use: Boolean for boolean, Character for char, Double for double etc.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// HASH TABLE it is similar to HashMap, but is synchronised. There are several differences between HashMap and Hashtable in Java:
+
+// HashMap is not synchronized. This makes HashMap better for non-threaded applications, as unsynchronized Objects typically perform better than synchronized ones.
+// Hashtable does not allow null keys or values. HashMap allows one null key and any number of null values.
+
+// One of HashMap's subclasses is LinkedHashMap, so in the event that you'd want predictable iteration order (which is insertion order by default), you could easily
+// swap out the HashMap for a LinkedHashMap. This wouldn't be as easy if you were using Hashtable. If synchronization is not an issue use HashMap as is generally
+// preferred over HashTable. If synchronization becomes an issue, you may also look at ConcurrentHashMap.

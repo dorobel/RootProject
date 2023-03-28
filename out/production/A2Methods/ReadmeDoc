@@ -1,0 +1,418 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Methods are blocks of code used to perform certain actions which only runs when it is called (they are also known as functions).
+
+// public class MyClass {
+//     static void myMethod() {
+//         System.out.println("I just got executed!");
+//     }
+//
+//     public static void main(String[] args) {
+//         myMethod();
+//     }
+// }
+
+// To call a method in Java, write the method's name followed by two parentheses () and a semicolon; A method can be called multiple times.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Syntax
+
+// modifier returnType nameOfMethod (Parameter List) {
+//    // method body
+// }
+
+// modifier − It defines the access type of the method and it is optional to use.
+// returnType − Method may return a value.
+// nameOfMethod − This is the method name. The method signature consists of the method name and the parameter list.
+// Parameter List − The list of parameters, it is the type, order, and number of parameters of a method. These are optional, method may contain zero parameters.
+// method body − The method body defines what the method does with the statements.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Parameters and Arguments
+// Information can be passed to methods as parameter. Parameters act as variables inside the method.
+
+// Parameters are specified after the method name, inside the parentheses. You can add as many parameters as you want, just separate them with a comma.
+// You can use any data type for a parameter of a method.
+
+// The following example has a method that takes a String called fname as parameter. When the method is called, we pass along a first name, which is used inside the
+// method to print the full name:
+
+// public class MyClass {
+//   public static void myMethod(String fname) {
+//     System.out.println(fname + " Refsnes");
+//   }
+
+//   public static void main(String[] args) {
+//     myMethod("Liam");
+//     myMethod("Jenny");
+//     myMethod("Anja");
+//   }
+// }
+
+// When a parameter is passed to the method, it is called an argument. So, from the example above: fname is a parameter, while Liam, Jenny and Anja are arguments!!!
+
+// Remember: Parameters refers to the list of variables in a method declaration. Arguments are the actual values that are passed in when the method is invoked.
+// When you invoke a method, the arguments used must match the declaration's parameters in type and order.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Multiple Parameters
+
+// You can have as many parameters as you like:
+
+// public class MyClass {
+//   static void myMethod(String fname, int age) {
+//     System.out.println(fname + " is " + age);
+//   }
+
+//   public static void main(String[] args) {
+//     myMethod("Liam", 5);
+//     myMethod("Jenny", 8);
+//     myMethod("Anja", 31);
+//   }
+// }
+
+// Note that when you are working with multiple parameters, the method call must have the same number of arguments as there are parameters, and the arguments must be
+// passed in the same order.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Return Values
+
+// The void keyword, used in the examples above, indicates that the method should not return a value. If you want the method to return a value, you can use a primitive
+// data type (such as int, char, etc.) instead of void, and use the return keyword inside the method:
+
+// public class MyClass {
+//     static int myMethod(int x) {
+//         return 5 + x;
+//     }
+//     public static void main(String[] args) {
+//         System.out.println(myMethod(3));
+//     }
+// }
+
+// This example returns the sum of a method's two parameters:
+
+// public class MyClass {
+//   static int myMethod(int x, int y) {
+//     return x + y;
+//   }
+//   public static void main(String[] args) {
+//     System.out.println(myMethod(5, 3));
+//   }
+// }
+
+// You can also store the result in a variable (recommended, as it is easier to read and maintain):
+
+// public class MyClass {
+//   static int myMethod(int x, int y) {
+//     return x + y;
+//   }
+//   public static void main(String[] args) {
+//     int z = myMethod(5, 3);
+//     System.out.println(z);
+//   }
+// }
+
+// A Method with If...Else
+// It is common to use if...else statements inside methods:
+
+// public class MyClass {
+//   public static void checkAge(int age) {
+//     if (age < 18) {
+//       System.out.println("Access denied - You are not old enough!");
+//     } else {
+//       System.out.println("Access granted - You are old enough!");
+//     }
+//   }
+//
+//   public static void main(String[] args) {
+//     checkAge(20);
+//   }
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Java Scope. In Java, variables are only accessible inside the region they are created. This is called scope.
+
+// a) Class Level Scope
+
+// These variables must be declared inside class (outside any function). They can be directly accessed anywhere in class. Let's take a look at an example:
+
+// public class MyClass
+// {
+//     // All variables defined directly inside a class are member variables
+//     int a;
+//     private String b
+//     void method1() {....}
+//     int method2() {....}
+//     char c;
+// }
+
+// We can declare class variables anywhere in class, but outside methods! Access specified of member variables doesn't effect scope of them within a class.
+// Member variables can be accessed outside a class with following rules:
+
+// Modifier      Subclass  Package  World
+//---------------------------------------
+// public          Yes      Yes     Yes
+// protected       Yes      Yes     No
+// Default (no
+// modifier)       No        Yes    No
+// private         No        No     No
+
+// b) Method scope -> Variables declared directly inside a method are available anywhere in the method and can't be accessed outside the method:
+
+// public class MyClass {
+//   public static void main(String[] args) {
+//     // Code here CANNOT use x
+//     int x = 100;
+//     // Code here can use x
+//     System.out.println(x);
+//   }
+// }
+
+// Note : Local variables don't exist after method's execution is over!!!
+
+// Here's another example of method scope, except this time the variable got passed in as a parameter to the method:
+
+// public class MyClass
+// {
+//     private int x;
+//     public void setX(int x)
+//     {
+//         this.x = x;
+//     }
+//    ....
+// }
+
+// The above code uses this keyword to differentiate between the local and class variables!!!
+
+// c) Block Scope -> A block of code refers to all of the code between curly braces {}. Variables declared inside blocks of code are only accessible by the code between
+// the curly braces, which follows the line in which the variable was declared:
+
+// public class MyClass {
+//     public static void main(String[] args) {
+//       // Code here CANNOT use x
+//       { // This is a block
+//         // Code here CANNOT use x
+//         int x = 100;
+//         // Code here CAN use x
+//         System.out.println(x);
+//      } // The block ends here
+//     // Code here CANNOT use x
+//     }
+//   }
+
+// A block of code may exist on its own or it can belong to an if, while or for statement. In the case of "for" statements, variables declared in the statement itself
+// are also available inside the block's scope. Some important points about variable scope in Java:
+
+// In general, a set of curly brackets { } defines a scope.
+// In Java we can usually access a variable as long as it was defined within the same set of brackets as the code we are writing or within any curly brackets inside of
+// the curly brackets where the variable was defined.
+// Any variable defined in a class outside of any method can be used by all member methods.
+// When a method has the same local variable as a member, this keyword can be used to reference the current class variable!!!
+// For a variable to be read after the termination of a loop, It must be declared before the body of the loop!!!
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Method Overloading. With method overloading, multiple methods can have the same name with different parameters:
+
+// Consider the following example, which have two methods that add numbers of different type:
+
+// public class MyClass {
+//     static int plusMethodInt(int x, int y) {
+//       return x + y;
+//     }
+//
+//     static double plusMethodDouble(double x, double y) {
+//       return x + y;
+//     }
+//
+//     public static void main(String[] args) {
+//       int myNum1 = plusMethodInt(8, 5);
+//       double myNum2 = plusMethodDouble(4.3, 6.26);
+//       System.out.println("int: " + myNum1);
+//       System.out.println("double: " + myNum2);
+//     }
+//   }
+
+// Instead of defining two methods that should do the same thing, it is better to overload one. Multiple methods can have the same name as long
+// as the number and/or type of parameters are different.
+
+// public class MyClass {
+//     static int plusMethod(int x, int y) {
+//       return x + y;
+//     }
+//
+//     static double plusMethod(double x, double y) { // same method name
+//       return x + y;
+//     }
+//
+//     public static void main(String[] args) {
+//       int myNum1 = plusMethod(8, 5);
+//       double myNum2 = plusMethod(4.3, 6.26);
+//       System.out.println("int: " + myNum1);
+//       System.out.println("double: " + myNum2);
+//     }
+//   }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Java Recursion
+
+// Recursion is the technique of making a function call itself. This technique provides a way to break complicated problems down into simple problems which are easier
+// to solve. In the following example, recursion is used to add a range of numbers together by breaking it down into the simple task of adding two numbers:
+
+// public class MyClass {
+//     public static void main(String[] args) {
+//       int result = sum(10);
+//       System.out.println(result);
+//     }
+//
+//     public static int sum(int k) {
+//       if (k > 0) {
+//         return k + sum(k - 1);
+//       } else {
+//         return 0;
+//       }
+//     }
+//   }
+
+// sum(3) = 3 + sum(2) => returns 6 <= final result
+// sum(2) = 2 + sum(1) => returns 3
+// sum(1) = 1 + sum(0) => returns 1
+
+// Just as loops can run into the problem of infinite looping, recursive functions can run into the problem of infinite recursion. Infinite recursion is when the function
+// never stops calling itself. Every recursive function should have a halting condition, which is the condition where the function stops calling itself. In the previous
+// example, the halting condition is when the parameter k becomes 0. Use recursion to add all of the numbers between 5 to 10:
+
+// public class MyClass {
+//   public static void main(String[] args) {
+//     int result = sum(5, 10);
+//     System.out.println(result);
+//   }
+//   public static int sum(int start, int end) {
+//     if (end > start) {
+//       return end + sum(start, end - 1);
+//     } else {
+//       return end; // "starting point"
+//     }
+//   }
+// }
+
+// sum(5,10) = 10 + sum(5,9) => returns 45
+// sum(5,9) = 9 + sum(5,8) => returns 35
+// sum(5,8) = 8 + sum(5+7) => returns 26
+// sum(5,7) = 7 + sum(5,6) => returns 18
+// sum(5,6) = 6 + sum(5,5) => returns 11
+// sum(5,5) => returns 5
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Java always passes parameters by value not by reference
+
+/////
+// Object references are passed by value
+// All object references in Java are passed by value. This means that a copy of the value will be passed to a method. But the trick is that passing a copy of the value
+// also changes the real value of the object. To understand why, start with this example:
+
+// public class ObjectReferenceExample {
+//
+// 	public static void main(String... doYourBest) {
+//     	    Simpson simpson = new Simpson();
+//     	    transformIntoHomer(simpson);
+//     	    System.out.println(simpson.name);
+// 	}
+//
+// 	static void transformIntoHomer(Simpson simpson) {
+//     	    simpson.name = "Homer";
+// 	}
+// }
+
+// class Simpson {
+// 	String name;
+// }
+
+// Above example will return Homer, the reason is that Java object variables are simply references that point to real objects in the memory heap. Therefore, even though
+// Java passes parameters to methods by value, if the variable points to an object reference, the real object will also be changed.
+
+/////
+// Are primitive types passed by value?
+// Like object types, primitive types are also passed by value.
+
+// public class PrimitiveByValueExample {
+
+// 	public static void main(String... primitiveByValue) {
+//     	    int homerAge = 30;
+//     	    changeHomerAge(homerAge);
+//     	    System.out.println(homerAge);
+// 	}
+
+// 	static void changeHomerAge(int homerAge) {
+//     	    homerAge = 35;
+// 	}
+// }
+
+// Above exmaple will return 30, its because (again) Java passes object parameters by value. The number 30 is just a copy of the value, not the real value.
+// Primitive types are allocated in the stack memory, so only the local value will be changed. In this case, there is no object reference. Check also bellow example:
+
+// int myIntValue = 10;
+// int anotherIntValue = myIntValue;
+
+// System.out.println("myIntValue = " + myIntValue);
+// System.out.println("anotherIntValue = " + anotherIntValue);
+
+// anotherIntValue++;
+
+// System.out.println("myIntValue = " + myIntValue); // 10
+// System.out.println("anotherIntValue = " + anotherIntValue); // 11
+
+/////
+// Passing immutable object references
+
+// The JDK contains many immutable classes. Examples include the wrapper types Integer, Double, Float, Long, Boolean, BigDecimal, and of course the very well known
+// String class. If String is immutable, why is the following statement allowed?
+
+// String a = "Generic Class";
+// a = "www.genericclass.com";
+
+// One can say in the above statements that they are able to change the value of a String object from "Generic Class" to "www.genericclass.com" but this assumption
+// is wrong. In the above statements, you are not changing the value of the String object but you are basically changing the reference. Previously, your variable
+// a was pointing to an object that had the value "Generic Class" but in the second statement a new object is created with value "www.genericclass.com" and your variable
+// started to point to this new object.
+
+//In the next example, notice what happens when we change the value of a String.
+
+// public class StringValueChange {
+
+// 	public static void main(String... doYourBest) {
+//     	    String name = "";
+//     	    changeToHomer(name);
+//     	    System.out.println(name);
+// 	}
+
+// 	static void changeToHomer(String name) {
+//     	    name = "Homer";
+// 	}
+// }
+
+// Above exmaple will return "" this happens because a String object is immutable!!! As Java passes parameters to methods by value, if the variable points to
+// an object reference, the real object will also be changed but Strings are immutable which means that the fields inside the String are final and can't be changed!!!
+
+// Making the String class immutable gives us better control over one of Java’s most used objects. If the value of a String could be changed, it would create a lot of
+// bugs. Also note that we’re not changing an attribute of the String class; instead, we’re simply assigning a new String value to it. In this case, the “Homer” value
+// will be passed to name in the changeToHomer method. The String “Homer” will be eligible to be garbage collected as soon as the changeToHomer method completes
+// execution. Even though the object can’t be changed, the local variable will be.
+
+/////
+// Passing mutable object references
+// Unlike String, most objects in the JDK are mutable, like the StringBuilder class. The example below is similar to the previous one, but features StringBuilder
+// rather than String:
+
+//  static class MutableObjectReference {
+//     public static void main(String... mutableObjectExample) {
+//       StringBuilder name = new StringBuilder("Homer ");
+//       addSureName(name);
+//       System.out.println(name);
+//     }
+
+//     static void addSureName(StringBuilder name) {
+//       name.append("Simpson");
+//     }
+//   }
+
+// In this case, because we’re working with a mutable object, the output will be “Homer Simpson”. You could expect the same behaviour from any other mutable object
+// in Java.
